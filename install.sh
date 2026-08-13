@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Цвета для красивого вывода в терминал
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+echo -e "${PURPLE}==================================================${NC}"
+echo -e "${CYAN}   Запуск установщика Boykisser OS v1.0 (Arch)    ${NC}"
+echo -e "${PURPLE}==================================================${NC}"
+echo ""
+
+# Шаг 1. Обновление баз данных и установка всех необходимых пакетов
+echo -e "${CYAN}[1/3] Установка системных утилит и мультимедиа...${NC}"
+sudo pacman -Syy --needed \
+    i3-wm i3status polybar rofi picom feh kitty fastfetch \
+    stow git brightnessctl scrot udiskie xdg-user-dirs \
+    ffmpeg mpv vlc celluloid x265 libheif \
+    file-roller p7zip unrar unzip zip \
+    nano-syntax-highlighting mousepad htop
+
+# Шаг 2. Создание базовых папок пользователя
+echo -e "${CYAN}[2/3] Создание системных директорий...${NC}"
+xdg-user-dirs-update
+mkdir -p ~/Pictures/Screenshots
+mkdir -p ~/.config
+
+# Шаг 3. Развёртывание симлинков через GNU Stow
+echo -e "${CYAN}[3/3] Развёртывание конфигурационных файлов через Stow...${NC}"
+cd ~/dotfiles
+
+# Удаляем дефолтные конфиги, если они создались, чтобы stow не ругался на конфликты
+rm -rf ~/.config/i3 ~/.config/kitty ~/.config/polybar ~/.config/fastfetch ~/.config/i3status ~/.config/picom ~/.nanorc ~/.bashrc 2>/dev/null
+
+# Заплетаем наши симлинки
+stow i3
+stow kitty
+stow polybar
+stow polybar-script
+stow fastfetch
+stow nano
+stow bash
+stow i3status
+stow picom
+
+echo ""
+echo -e "${GREEN}==================================================${NC}"
+echo -e "${GREEN}       Boykisser OS успешно установлена!          ${NC}"
+echo -e "${GREEN}  Перезапустите i3 (Mod+Shift+R) для применения.  ${NC}"
+echo -e "${GREEN}==================================================${NC}"
