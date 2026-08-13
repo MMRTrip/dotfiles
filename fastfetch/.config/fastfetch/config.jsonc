@@ -1,0 +1,50 @@
+{
+  "logo": {
+    "source": "~/.config/fastfetch/boykisser.txt",
+    "padding": {
+      "top": 1,
+      "left": 2,
+      "right": 4
+    }
+  },
+  "display": {
+    "separator": " ❯ ",
+    "color": {
+      "keys": "cyan",
+      "title": "magenta"
+    }
+  },
+  "modules": [
+    "title",
+    {
+      "type": "custom",
+      "format": "──────────────────────────────"
+    },
+    {
+      "type": "os",
+      "key": " ОС",
+      "format": "Boykisser OS v1.0 (Arch)"
+    },
+    {
+      "type": "kernel",
+      "key": " Ядро"
+    },
+    {
+      "type": "uptime",
+      "key": " Аптайм"
+    },
+    {
+      "type": "packages",
+      "key": " Пакеты"
+    },
+    {
+      "type": "shell",
+      "key": " Оболочка"
+    },
+    {
+      "type": "custom",
+      "format": "──────────────────────────────"
+    },
+    "colors"
+  ]
+}

@@ -1,0 +1,199 @@
+# =====================================================================
+#  УЛЬТИМАТИВНЫЙ НЕОНОВЫЙ КОНФИГ i3WM (Юзер: mmrtrip)
+# =====================================================================
+
+# --- Основные настройки модификатора и шрифтов ---
+set $mod Mod4
+font pango:monospace 10
+floating_modifier $mod
+tiling_drag modifier titlebar
+
+# --- Настройка зазоров (Gaps) ---
+gaps inner 8
+gaps outer 4
+
+# --- Поведение окон и скрытие синих заголовков ---
+default_border pixel 2
+default_floating_border pixel 2
+for_window [class=".*"] border pixel 2
+
+# Окна скриншотера всегда запускаем в плавающем режиме
+for_window [class="flameshot"] floating enable
+for_window [class="flameshot"] border pixel 0
+for_window [class="flameshot"] move position center
+
+# =====================================================================
+#  АВТОЗАГРУЗКА И ДЕМОНЫ (Запускаются один раз при старте)
+# =====================================================================
+
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id nm-applet
+
+# =====================================================================
+#  АВТОЗАГРУЗКА ПРИ КАЖДОМ RESTART (exec_always)
+# =====================================================================
+
+# Восстановление твоих обоев
+exec_always --no-startup-id feh --bg-fill ~/Wallpaper.jpg
+
+# Автомонтирование флешек без значка в трее панели
+exec_always --no-startup-id udiskie -s &
+
+# Наш лаунчер Polybar
+exec_always --no-startup-id /home/mmrtrip/polybar-launch.sh
+
+# Безопасный перезапуск picom без спама GLX-ошибками в лицо
+exec_always --no-startup-id sh -c "pkill -9 picom; sleep 0.5; picom --config ~/.config/picom/picom.conf -b >/dev/null 2>&1"
+
+# =====================================================================
+#  ГОРЯЧИЕ КЛАВИШИ (БИНДЫ)
+# =====================================================================
+
+# Запуск основного софта
+bindsym $mod+Return exec kitty
+bindsym $mod+Shift+q kill
+
+# Меню запуска приложений Rofi (наше полупрозрачное неоновое окно)
+bindsym $mod+d exec --no-startup-id rofi -show drun
+
+# Навигация по окнам (клавиатура)
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# Навигация по окнам (стрелочки)
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Перемещение окон (клавиатура)
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+colon move right
+
+# Перемещение окон (стрелочки)
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Управление макетами окон (Разделение / Фуллскрин)
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+f fullscreen toggle
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+
+# --- Рабочие столы (Воркспейсы) ---
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Перемещение окон между рабочими столами
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Управление сессией оконного менеджера
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Вы действительно хотите выйти из i3? Это завершит текущую сессию X.' -B 'Да, выйти' 'i3-msg exit'"
+
+# --- Родные плавные мультимедиа клавиши звука (pactl + мгновенный вывод) ---
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && amixer sget Master | grep -o -m 1 '[0-9]*%' > /tmp/i3status_vol && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && amixer sget Master | grep -o -m 1 '[0-9]*%' > /tmp/i3status_vol && $refresh_i3status
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && (pactl get-sink-mute @DEFAULT_SINK@ | grep -q "yes" && echo "MUTED" || amixer sget Master | grep -o -m 1 '[0-9]*%') > /tmp/i3status_vol && $refresh_i3status
+
+# Яркость экрана через стабильный brightnessctl
+bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+
+# --- Скриншоты (Scrot) ---
+bindsym Print exec --no-startup-id scrot -s ~/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S-screenshot.png
+bindsym $mod+Shift+s exec --no-startup-id scrot ~/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S-screenshot.png
+
+# --- Безопасная блокировка экрана (Betterlockscreen) ---
+bindsym $mod+Shift+x exec --no-startup-id betterlockscreen -l blur
+
+# --- Быстрый вызов неонового диспетчера задач htop ---
+bindsym Ctrl+Shift+Escape exec --no-startup-id kitty --class "htop_task" -e htop
+for_window [class="htop_task"] floating enable, resize set 900 600, move position center
+
+# =====================================================================
+#  РЕЖИМ ИЗМЕНЕНИЯ РАЗМЕРОВ ОКНА (Resize Mode)
+# =====================================================================
+mode "resize" {
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # Те же привязки, но для клавиш со стрелками
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # Вернуться в обычный режим
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# =====================================================================
+#  НАСТРОЙКА ВЕРХНЕЙ ПАНЕЛИ i3BAR
+# =====================================================================
+bar {
+    position top
+    status_command i3status
+    font pango:monospace 10
+    height 22
+    tray_output none
+    
+    colors {
+        background #CC111216
+        statusline #F7E3EC
+        separator  #4C4B63
+
+        # Наш кастомный неоновый пак цветов воркспейсов
+        focused_workspace  #BC71FF  #BC71FF  #111216
+        active_workspace   #4C4B63  #1A1B26  #F7E3EC
+        inactive_workspace #111216  #111216  #6C7086
+        urgent_workspace   #FF4A4A  #FF4A4A  #F7E3EC
+        binding_mode       #FF5E97  #FF5E97  #111216
+    }
+}

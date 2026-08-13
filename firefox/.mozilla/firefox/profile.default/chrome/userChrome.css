@@ -1,0 +1,68 @@
+/* =====================================================================
+   УЛЬТИМАТИВНЫЙ НЕОНОВЫЙ ОДНОСТРОЧНЫЙ FIREFOX (Cascade + Vaporwave)
+   ===================================================================== */
+
+/* --- Сжатие интерфейса в одну линию (Тема Cascade) --- */
+#TabsToolbar {
+    margin-right: 35vw !important; /* Освобождаем правый угол под адресную строку */
+}
+
+#nav-bar {
+    margin-top: -38px !important;
+    margin-left: 65vw !important; /* Смещаем адресную строку в правый угол */
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Насильно скрываем уродливую кнопку закрытия, стрелочки и лишний мусор */
+#TabsToolbar .titlebar-buttonbox-container,
+#identity-box,
+#tracking-protection-icon-container,
+.tab-close-button {
+    display: none !important;
+}
+
+/* --- Перекрашивание под наш неоновый вайб --- */
+:root {
+    --bg-color: #111216;        /* Глубокий темный фон */
+    --accent-purple: #BC71FF;   /* Фиолетовый неон */
+    --pink-boykisser: #FF5E97;  /* Розовый румянец */
+    --text-white: #F7E3EC;      /* Белый текст */
+}
+
+/* Фон всего браузера и адресной строки */
+#browser, 
+#navigator-toolbox,
+#urlbar-background {
+    background-color: var(--bg-color) !important;
+    border: none !important;
+}
+
+/* Текст внутри адресной строки */
+#urlbar-input {
+    color: var(--text-white) !important;
+    font-family: monospace !important;
+}
+
+/* Текст на вкладках */
+.tab-label {
+    color: var(--text-white) !important;
+    font-family: monospace !important;
+}
+
+/* Активная (выбранная) вкладка горит ядовито-розовым */
+.tabbrowser-tab[selected="true"] .tab-background {
+    background-color: var(--pink-boykisser) !important;
+    border-bottom: 2px solid var(--accent-purple) !important;
+}
+
+/* Неактивные вкладки аккуратно сливаются с фоном */
+.tabbrowser-tab[selected="false"] .tab-background {
+    background-color: #1A1B26 !important;
+}
+
+/* Подсветка рамки адресной строки при фокусе (когда кликаешь) */
+#urlbar[focused="true"] #urlbar-background {
+    border: 1px solid var(--accent-purple) !important;
+    box-shadow: 0 0 4px var(--accent-purple) !important;
+}
