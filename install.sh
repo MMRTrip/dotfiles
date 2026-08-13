@@ -18,15 +18,16 @@ sudo pacman -Syy --needed \
     xf86-video-intel xf86-video-amdgpu \
     mesa mesa-utils ttf-dejavu ttf-liberation noto-fonts
 
-# Шаг 2. Звуковой сервер (PipeWire + PulseAudio эмуляция для pactl)
-echo -e "${CYAN}[2/5] Настройка звуковой подсистемы...${NC}"
+# Шаг 2. Звуковой сервер и утилиты контроля звука (PipeWire + PulseAudio эмуляция + ALSA)
+echo -e "${CYAN}[2/5] Настройка звуковой подсистемы и микшеров...${NC}"
 sudo pacman -S --needed \
-    pipewire pipewire-pulse pipewire-alsa pipewire-jack wireplumber
+    pipewire pipewire-pulse pipewire-alsa pipewire-jack wireplumber \
+    pulseaudio-ctl alsa-utils
 
-# Шаг 3. Весь наш кастомный софт, плееры, текстовые редакторы и кодеки
-echo -e "${CYAN}[3/5] Накат софта, мультимедиа и кодеков...${NC}"
+# Шаг 3. Сеть, Системный софт, Плееры, Текстовые редакторы и Кодеки
+echo -e "${CYAN}[3/5] Накат сети, софта, мультимедиа и кодеков...${NC}"
 sudo pacman -S --needed \
-    i3-wm i3status polybar rofi picom feh kitty fastfetch \
+    networkmanager nm-applet i3-wm i3status polybar rofi dmenu picom feh kitty fastfetch \
     stow git brightnessctl scrot udiskie xdg-user-dirs betterlockscreen \
     ffmpeg mpv vlc celluloid x265 libheif \
     file-roller p7zip unrar unzip zip \
