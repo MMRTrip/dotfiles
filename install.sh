@@ -12,7 +12,7 @@ echo -e "${PURPLE}==================================================${NC}"
 echo ""
 
 # Шаг 1. Обновление баз данных и установка всех необходимых пакетов
-echo -e "${CYAN}[1/3] Установка системных утилит и мультимедиа...${NC}"
+echo -e "${CYAN}[1/4] Установка системных утилит и мультимедиа...${NC}"
 sudo pacman -Syy --needed \
     i3-wm i3status polybar rofi picom feh kitty fastfetch \
     stow git brightnessctl scrot udiskie xdg-user-dirs \
@@ -21,13 +21,26 @@ sudo pacman -Syy --needed \
     nano-syntax-highlighting mousepad htop
 
 # Шаг 2. Создание базовых папок пользователя
-echo -e "${CYAN}[2/3] Создание системных директорий...${NC}"
+echo -e "${CYAN}[2/4] Создание системных директорий...${NC}"
 xdg-user-dirs-update
 mkdir -p ~/Pictures/Screenshots
 mkdir -p ~/.config
 
-# Шаг 3. Развёртывание симлинков через GNU Stow
-echo -e "${CYAN}[3/3] Развёртывание конфигурационных файлов через Stow...${NC}"
+# Шаг 3. Автоматическая настройка прав Polkit для внешних дисков
+echo -e "${CYAN}[3/4] Настройка прав монтирования внешних дисков (Polkit)...${NC}"
+sudo mkdir -p /etc/polkit-1/rules.d
+sudo bash -c 'cat << EOF > /etc/polkit-1/rules.d/10-udisks2.rules
+polkit.addRule(function(action, subject) {
+    if ((action.id == "org.freedesktop.udisks2.filesystem-mount" ||
+         action.id == "org.freedesktop.udisks2.filesystem-mount-system") &&
+        subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+    }
+});
+EOF'
+
+# Шаг 4. Развёртывание симлинков через GNU Stow
+echo -e "${CYAN}[4/4] Развёртывание конфигурационных файлов через Stow...${NC}"
 cd ~/dotfiles
 
 # Удаляем дефолтные конфиги, если они создались, чтобы stow не ругался на конфликты
