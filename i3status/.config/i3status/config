@@ -8,10 +8,9 @@
 
 general {
         colors = true
-        interval = 5
+        interval = 2
 }
 
-# Считываем громкость из текстового файла, который обновляет кнопка
 order += "read_file VOL"
 order += "battery all"
 order += "tztime local"
@@ -27,4 +26,4 @@ battery all {
 
 tztime local {
         format = " %d.%m.%Y %H:%M "
-
+}
