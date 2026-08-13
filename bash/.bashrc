@@ -16,6 +16,7 @@ RESET="\[\033[0m\]"
 # Сама строка: [Имя] в фиолетовом -> Папка в розовом -> Неоновая стрелка
 PS1="${PURPLE}[${WHITE}\u${PURPLE}]${RESET} ${PINK}\w${RESET} ${CYAN}❯${RESET} "
 fastfetch
+sh ~/dotfiles/fastfetch/quote.sh
 
 #alias ls='ls --color=auto'
 alias grep='grep --color=auto'
