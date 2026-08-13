@@ -51,7 +51,7 @@ exec_always --no-startup-id sh -c "pkill -9 picom; sleep 0.5; picom --config ~/.
 
 # Запуск основного софта
 bindsym $mod+Return exec kitty
-bindsym $mod+Shift+q kill && paplay /usr/share/sounds/freedesktop/stereo/window-close.oga
+bindsym $mod+Shift+q exec --no-startup-id paplay /usr/share/sounds/freedesktop/stereo/window-close.oga; kill
 
 # Меню запуска приложений Rofi (наше полупрозрачное неоновое окно)
 bindsym $mod+d exec --no-startup-id rofi -show drun
@@ -142,11 +142,11 @@ bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl set 5%+
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
 # --- Скриншоты (Scrot) ---
-bindsym Print exec --no-startup-id scrot -s ~/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S-screenshot.png && paplay /usr/share/sounds/freedesktop/stereo/camera-shutter.oga
-bindsym $mod+Shift+s exec --no-startup-id scrot ~/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S-screenshot.png && paplay /usr/share/sounds/freedesktop/stereo/camera-shutter.oga
+bindsym Print exec --no-startup-id "scrot -s ~/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S-screenshot.png; paplay /usr/share/sounds/freedesktop/stereo/camera-shutter.oga"
+bindsym $mod+Shift+s exec --no-startup-id "scrot ~/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S-screenshot.png; paplay /usr/share/sounds/freedesktop/stereo/camera-shutter.oga"
 
 # --- Безопасная блокировка экрана (Betterlockscreen) ---
-bindsym $mod+Shift+x exec --no-startup-id betterlockscreen -l blur && paplay /usr/share/sounds/freedesktop/stereo/service-logout.oga
+bindsym $mod+Shift+x exec --no-startup-id "betterlockscreen -l blur; paplay /usr/share/sounds/freedesktop/stereo/service-logout.oga"
 
 # --- Быстрый вызов неонового диспетчера задач htop ---
 bindsym Ctrl+Shift+Escape exec --no-startup-id kitty --class "htop_task" -e htop
