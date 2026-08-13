@@ -1,0 +1,19 @@
+# --- Кастомизация Betterlockscreen под Vaporwave ---
+
+# Текст приветствия поверх размытия
+login_text="Boykisser OS Secured"
+
+# Шрифты и размеры текста
+font="monospace"
+login_text_size=24
+time_size=48
+date_size=16
+
+# Цветовая палитра под наш неон (Формат: RGBA в hex)
+# Наш фирменный фиолетовый неон #BC71FF и розовый #FF5E97
+time_color="bc71ffff"
+date_color="ff5e97ff"
+login_text_color="f7e3ecff"
+
+# Настройки эффектов размытия
+blur=1.5
