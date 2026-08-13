@@ -57,7 +57,7 @@ cd ~/dotfiles
 rm -rf ~/.config/i3 ~/.config/kitty ~/.config/polybar ~/.config/fastfetch ~/.config/i3status ~/.config/picom ~/.nanorc ~/.bashrc 2>/dev/null
 
 # Заплетаем симлинки
-stow i3 kitty polybar polybar-script fastfetch nano bash i3status picom
+stow i3 kitty polybar polybar-script fastfetch nano bash i3status picom betterlockscreen x11
 
 echo ""
 echo -e "${GREEN}==================================================${NC}"
