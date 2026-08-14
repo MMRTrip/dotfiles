@@ -110,7 +110,10 @@ rm -rf ~/.config/i3 ~/.config/kitty ~/.config/polybar ~/.config/fastfetch ~/.con
 sudo ln -sf /home/\$USER/dotfiles/nano/.nanorc /root/.nanorc
 
 # Заплетаем симлинки Stow для обычного пользователя
-stow i3 kitty polybar polybar-script fastfetch nano bash i3status picom betterlockscreen x11
+stow i3 kitty polybar polybar-script fastfetch nano bash i3status picom betterlockscreen x11 grub
+
+# Обновляем системный загрузчик, чтобы он применил тему
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 echo ""
 echo -e "${GREEN}==================================================${NC}"

@@ -1,0 +1,16 @@
+title-text: "Boykisser OS Boot Menu"
+title-font: "DejaVu Sans Regular 16"
+title-color: "#BC71FF"
+
+# Настройки списка операционных систем
++ boot_menu {
+  left = 15%
+  top = 30%
+  width = 70%
+  height = 50%
+  item_font = "DejaVu Sans Regular 12"
+  item_color = "#FFFFFF"
+  selected_item_color = "#FF5E97"
+  item_height = 24
+  item_spacing = 8
+}
