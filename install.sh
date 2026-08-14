@@ -117,10 +117,11 @@ rm -rf ~/.config/i3 \
        ~/.nanorc \
        ~/.bashrc \
        ~/.xinitrc \
+       /etc/lightdm/lightdm-gtk-greeter.conf \
        /boot/grub/themes/neon_boy 2>/dev/null
 
 # Заплетаем наши симлинки
-stow i3 kitty polybar polybar-script fastfetch nano bash i3status picom betterlockscreen x11 grub
+stow i3 kitty polybar polybar-script fastfetch nano bash i3status picom betterlockscreen x11 grub lightdm
 
 # Обновляем системный загрузчик, чтобы он применил тему
 sudo grub-mkconfig -o /boot/grub/grub.cfg
