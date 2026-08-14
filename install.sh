@@ -103,17 +103,29 @@ mkdir -p ~/Pictures/Screenshots
 mkdir -p ~/.config
 
 cd ~/dotfiles
-rm -rf ~/.config/i3 ~/.config/kitty ~/.config/polybar ~/.config/fastfetch ~/.config/i3status ~/.config/picom ~/.nanorc ~/.bashrc 2>/dev/null
-# ... (это конец Шага 5, прямо перед вызовом stow) ...
+# ... (это конец Шага 4 / начало Шага 5) ...
 
-# Автоматически дарим наш прокачанный .nanorc пользователю root
-sudo ln -sf /home/\$USER/dotfiles/nano/.nanorc /root/.nanorc
+cd ~/dotfiles
 
-# Заплетаем симлинки Stow для обычного пользователя
+rm -rf ~/.config/i3 \
+       ~/.config/kitty \
+       ~/.config/polybar \
+       ~/.config/fastfetch \
+       ~/.config/i3status \
+       ~/.config/picom \
+       ~/.config/betterlockscreen \
+       ~/.nanorc \
+       ~/.bashrc \
+       ~/.xinitrc \
+       /boot/grub/themes/neon_boy 2>/dev/null
+
+# Заплетаем наши симлинки
 stow i3 kitty polybar polybar-script fastfetch nano bash i3status picom betterlockscreen x11 grub
 
 # Обновляем системный загрузчик, чтобы он применил тему
 sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+sudo ln -sf /home/\$USER/dotfiles/nano/.nanorc /root/.nanorc
 
 echo ""
 echo -e "${GREEN}==================================================${NC}"
