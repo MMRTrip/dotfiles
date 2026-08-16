@@ -72,7 +72,7 @@ EOF
         sudo pacman -S --needed pipewire pipewire-pulse pipewire-alsa pipewire-jack wireplumber alsa-utils
 
         echo -e "${CYAN}[4/6] Накат сети, софта, мультимедиа и кодеков...${NC}"
-        sudo pacman -S --needed networkmanager network-manager-applet i3-wm i3status polybar rofi dmenu picom feh kitty fastfetch stow git brightnessctl scrot udiskie xdg-user-dirs ffmpeg mpv vlc celluloid x265 libheif file-roller p7zip unrar unzip zip nano nano-syntax-highlighting mousepad htop firefox
+        sudo pacman -S --needed networkmanager network-manager-applet i3-wm i3status polybar rofi dmenu picom feh kitty fastfetch stow git brightnessctl scrot udiskie xdg-user-dirs ffmpeg mpv vlc celluloid x265 libheif file-roller p7zip unrar unzip zip nano nano-syntax-highlighting mousepad htop firefox qt5-quickcontrols qt5-quickcontrols2 qt5-graphicaleffects
 
         echo -e "${CYAN}[5/6] Настройка прав доступа Polkit для дисков...${NC}"
         sudo mkdir -p /etc/polkit-1/rules.d
