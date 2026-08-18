@@ -9,7 +9,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # --- Настройка зазоров (Gaps) ---
-gaps inner 8
+gaps inner 6
 gaps outer 4
 
 # --- Поведение окон и скрытие синих заголовков ---
@@ -34,13 +34,13 @@ exec --no-startup-id nm-applet
 # =====================================================================
 
 # Восстановление твоих обоев
-exec_always --no-startup-id feh --bg-fill ~/Wallpaper.jpg
+exec_always --no-startup-id feh --bg-fill ~/dotfiles/i3/.config/i3/wallpaper.png
 
 # Автомонтирование флешек без значка в трее панели
 exec_always --no-startup-id udiskie -s &
 
 # Наш лаунчер Polybar
-exec_always --no-startup-id /home/mmrtrip/polybar-launch.sh
+exec_always --no-startup-id ~dotfiles/polybar-script/polybar-launch.sh
 
 # Безопасный перезапуск picom без спама GLX-ошибками в лицо
 exec_always --no-startup-id sh -c "pkill -9 picom; sleep 0.5; picom --config ~/.config/picom/picom.conf -b >/dev/null 2>&1"
@@ -53,7 +53,7 @@ exec_always --no-startup-id sh -c "pkill -9 picom; sleep 0.5; picom --config ~/.
 bindsym $mod+Return exec kitty
 bindsym $mod+Shift+q exec --no-startup-id paplay /usr/share/sounds/freedesktop/stereo/window-close.oga; kill
 
-# Меню запуска приложений Rofi (наше полупрозрачное неоновое окно)
+# Меню запуска приложений Rofi (dmenu установлено для подстраховки)
 bindsym $mod+d exec --no-startup-id rofi -show drun
 
 # Навигация по окнам (клавиатура)

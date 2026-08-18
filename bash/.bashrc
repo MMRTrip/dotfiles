@@ -29,7 +29,7 @@ alias grep='grep --color=auto'
 alias sync="sh ~/dotfiles/sync.sh"
 
 # 2. Управление пакетами Pacman без лишней писанины
-alias install="sudo pacman -S"         # Установка пакета (например: install mpv)
+alias install="sudo pacman -S --needed"         # Установка пакета (например: install mpv)
 alias upd="sudo pacman -Syu"        # Полное обновление всей системы одной командой
 alias remv="sudo pacman -Rns"        # Чистое удаление программы вместе с её мусором
 
