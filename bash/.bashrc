@@ -18,8 +18,6 @@ PS1="${PURPLE}[${WHITE}\u${PURPLE}]${RESET} ${PINK}\w${RESET} ${CYAN}❯${RESET}
 fastfetch
 sh ~/dotfiles/fastfetch/quote.sh
 
-#alias ls='ls --color=auto'
-alias grep='grep --color=auto'
 
 # =====================================================================
 #  КАСТОМНЫЕ АЛИАСЫ ДЛЯ ЛЕНИВОГО ЧИЛЛА (Юзер: mmrtrip)
@@ -37,6 +35,8 @@ alias remv="sudo pacman -Rns"        # Чистое удаление прогр�
 alias ls="ls --color=auto -la"          # ls сразу показывает всё: скрытые файлы, права и сочные цвета
 alias c="clear"                         # Очистить терминал одной буквой 'c'
 alias q="exit"                          # Закрыть терминал одной буквой 'q'
+#alias ls='ls --color=auto'
+alias grep='grep --color=auto'
 
 # 4. Быстрый доступ к главным конфигам из любой точки системы
 alias i3conf="nano ~/dotfiles/i3/.config/i3/config"

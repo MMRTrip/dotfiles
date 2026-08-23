@@ -17,6 +17,25 @@ default_border pixel 2
 default_floating_border pixel 2
 for_window [class=".*"] border pixel 2
 
+# =============================================================================
+# --- Оформление окон (Vaporwave / Noir) ---
+# =============================================================================
+
+new_window pixel 2
+new_float pixel 2
+default_border pixel 2
+default_floating_border pixel 2
+
+# Цветовая схема окон i3wm
+# Формат: класс_окна цвет_границы цвет_фона цвет_текста цвет_индикатора цвет_внутренней_границы
+client.focused          #ff66cc #1a1a24 #ffffff #ff66cc #ff66cc
+client.focused_inactive #444454 #1a1a24 #888888 #444454 #444454
+client.unfocused        #1a1a24 #1a1a24 #888888 #1a1a24 #1a1a24
+client.urgent           #ff3333 #1a1a24 #ffffff #ff3333 #ff3333
+client.placeholder      #000000 #0c0c0c #ffffff #000000 #0c0c0c
+client.background       #1a1a24
+
+
 # Окна скриншотера всегда запускаем в плавающем режиме
 for_window [class="flameshot"] floating enable
 for_window [class="flameshot"] border pixel 0
@@ -40,7 +59,7 @@ exec_always --no-startup-id feh --bg-fill ~/dotfiles/i3/.config/i3/wallpaper.png
 exec_always --no-startup-id udiskie -s &
 
 # Наш лаунчер Polybar
-exec_always --no-startup-id ~dotfiles/polybar-script/polybar-launch.sh
+exec_always --no-startup-id ~/dotfiles/polybar-script/polybar-launch.sh
 
 # Безопасный перезапуск picom без спама GLX-ошибками в лицо
 exec_always --no-startup-id sh -c "pkill -9 picom; sleep 0.5; picom --config ~/.config/picom/picom.conf -b >/dev/null 2>&1"
