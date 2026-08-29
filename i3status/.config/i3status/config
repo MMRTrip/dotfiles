@@ -15,10 +15,10 @@ order += "read_file VOL"
 order += "battery all"
 order += "tztime local"
 
-read_file VOL {
-        path = "/tmp/i3status_vol"
-        format = " VOL: %content "
-}
+#read_file VOL {
+#        path = "/tmp/i3status_vol"
+#        format = " VOL: %content "
+#}
 
 battery all {
         format = " BAT: %percentage "

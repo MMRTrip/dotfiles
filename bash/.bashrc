@@ -42,3 +42,10 @@ alias grep='grep --color=auto'
 alias i3conf="nano ~/dotfiles/i3/.config/i3/config"
 alias bshconf="nano ~/dotfiles/bash/.bashrc"
 alias nanoconf="nano ~/dotfiles/nano/.nanorc"
+alias pin="mousepad ~/.config/my_pinned_clips.txt"
+alias cc="echo "" > ~/.cache/my_clip_history.txt"
+alias ls='lsd'
+alias l='lsd -l'
+alias la='lsd -a'
+alias lla='lsd -la'
+alias lt='lsd --tree'

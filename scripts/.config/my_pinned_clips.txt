@@ -1,0 +1,1 @@
+📌 Пример закрепа (измени меня в ~/.config/my_pinned_clips.txt)

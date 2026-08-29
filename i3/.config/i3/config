@@ -64,6 +64,9 @@ exec_always --no-startup-id ~/dotfiles/polybar-script/polybar-launch.sh
 # Безопасный перезапуск picom без спама GLX-ошибками в лицо
 exec_always --no-startup-id sh -c "pkill -9 picom; sleep 0.5; picom --config ~/.config/picom/picom.conf -b >/dev/null 2>&1"
 
+# Очиcтка буфера при каждом старте системы
+exec --no-startup-id echo "" > ~/.cache/my_clip_history.txt
+
 # =====================================================================
 #  ГОРЯЧИЕ КЛАВИШИ (БИНДЫ)
 # =====================================================================
@@ -74,6 +77,17 @@ bindsym $mod+Shift+q exec --no-startup-id paplay /usr/share/sounds/freedesktop/s
 
 # Меню запуска приложений Rofi (dmenu установлено для подстраховки)
 bindsym $mod+d exec --no-startup-id rofi -show drun
+
+# Меню Эмодзи
+bindsym $mod+period exec --no-startup-id rofimoji --files emojis
+bindsym $mod+comma exec --no-startup-id rofimoji --files kaomoji
+bindsym $mod+slash exec --no-startup-id rofimoji --files supplemental_arrows
+bindsym $mod+KP_Divide exec --no-startup-id rofimoji --files mathematical_operators
+bindsym $mod+KP_Multiply exec --no-startup-id rofimoji --files greek_and_coptic
+
+#Буфер обмена
+exec --no-startup-id ~/my_clipboard.py
+bindsym $mod+Shift+v exec --no-startup-id text=$(cat ~/.config/my_pinned_clips.txt ~/.cache/my_clip_history.txt 2>/dev/null | rofi -dmenu -p "Clipboard") && [ ! -z "$text" ] && echo -n "$text" | xclip -selection clipboard && sleep 0.2 && xdotool key ctrl+v
 
 # Навигация по окнам (клавиатура)
 bindsym $mod+j focus left
@@ -148,7 +162,7 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # Управление сессией оконного менеджера
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Вы действительно хотите выйти из i3? Это завершит текущую сессию X.' -B 'Да, выйти' 'i3-msg exit'"
+bindsym $mod+Shift+e exec --no-startup-id ~/powermenu.sh
 
 # --- Родные плавные мультимедиа клавиши звука (pactl + мгновенный вывод) ---
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -166,6 +180,8 @@ bindsym $mod+Shift+s exec --no-startup-id "scrot ~/Pictures/Screenshots/%Y-%m-%d
 
 # --- Безопасная блокировка экрана (Betterlockscreen) ---
 bindsym $mod+Shift+x exec --no-startup-id "betterlockscreen -l blur; paplay /usr/share/sounds/freedesktop/stereo/service-logout.oga"
+exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l
+exec_always --no-startup-id ~/.config/i3/lid-watcher.sh
 
 # --- Быстрый вызов неонового диспетчера задач htop ---
 bindsym Ctrl+Shift+Escape exec --no-startup-id kitty --class "htop_task" -e htop
@@ -216,3 +232,12 @@ bar {
         binding_mode       #FF5E97  #FF5E97  #111216
     }
 }
+
+
+
+# Исправление окон и меню Steam
+for_window [class="^Steam$" title="^Friends List$"] floating enable
+for_window [class="^Steam$" title="^Steam - News$"] floating enable
+for_window [class="^Steam$" title=".* - Chat$"] floating enable
+for_window [class="^Steam$" title="^Settings$"] floating enable
+for_window [class="^Steam$" title=".* - event page$"] floating enable

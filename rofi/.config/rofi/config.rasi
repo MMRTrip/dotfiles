@@ -1,0 +1,68 @@
+configuration {
+    modi: "drun,run,window";
+    font: "monospace 11";
+    show-icons: false;
+    terminal: "kitty";
+    drun-display-format: "{name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    display-drun: "     Apps ";
+    display-run: "     Run ";
+}
+
+* {
+    /* Цвета из нашего неонового конфига Polybar */
+    bg-color: #CC111216;
+    bg-alt: #DD1A1B26;
+    fg-color: #F7E3EC;
+    accent-color: #BC71FF;
+    select-color: #FF5E97;
+
+    background-color: transparent;
+    text-color: @fg-color;
+}
+
+window {
+    width: 450px;
+    background-color: @bg-color;
+    border: 2px;
+    border-color: @accent-color;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+}
+
+inputbar {
+    background-color: @bg-alt;
+    border-radius: 6px;
+    padding: 8px;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    text-color: @select-color;
+    weight: bold;
+}
+
+entry {
+    margin: 0px 0px 0px 10px;
+}
+
+listview {
+    lines: 8;
+    margin: 15px 0px 0px 0px;
+}
+
+element {
+    padding: 6px;
+    border-radius: 4px;
+}
+
+element selected {
+    background-color: @select-color;
+    text-color: #111216;
+}
