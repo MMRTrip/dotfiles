@@ -47,25 +47,25 @@ for_window [class="flameshot"] move position center
 
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id nm-applet
+exec --no-startup-id lxpolkit
+# Очиcтка буфера при каждом старте системы
+exec --no-startup-id echo "" > ~/.cache/my_clip_history.txt
 
 # =====================================================================
 #  АВТОЗАГРУЗКА ПРИ КАЖДОМ RESTART (exec_always)
 # =====================================================================
 
-# Восстановление твоих обоев
+# Восстановление обоев
 exec_always --no-startup-id feh --bg-fill ~/dotfiles/i3/.config/i3/wallpaper.png
 
 # Автомонтирование флешек без значка в трее панели
-exec_always --no-startup-id udiskie -s &
+exec --no-startup-id udiskie -T
 
 # Наш лаунчер Polybar
 exec_always --no-startup-id ~/dotfiles/polybar-script/polybar-launch.sh
 
 # Безопасный перезапуск picom без спама GLX-ошибками в лицо
 exec_always --no-startup-id sh -c "pkill -9 picom; sleep 0.5; picom --config ~/.config/picom/picom.conf -b >/dev/null 2>&1"
-
-# Очиcтка буфера при каждом старте системы
-exec --no-startup-id echo "" > ~/.cache/my_clip_history.txt
 
 # =====================================================================
 #  ГОРЯЧИЕ КЛАВИШИ (БИНДЫ)
@@ -88,6 +88,16 @@ bindsym $mod+KP_Multiply exec --no-startup-id rofimoji --files greek_and_coptic
 #Буфер обмена
 exec --no-startup-id ~/my_clipboard.py
 bindsym $mod+Shift+v exec --no-startup-id text=$(cat ~/.config/my_pinned_clips.txt ~/.cache/my_clip_history.txt 2>/dev/null | rofi -dmenu -p "Clipboard") && [ ! -z "$text" ] && echo -n "$text" | xclip -selection clipboard && sleep 0.2 && xdotool key ctrl+v
+
+# Запуск графического окна Wi-Fi сетей
+bindsym $mod+Shift+n exec --no-startup-id nm-connection-editor
+
+# Запуск графического окна Bluetooth
+bindsym $mod+Shift+b exec --no-startup-id blueman-manager
+
+# Правила, чтобы они открывались как плавающие окна по центру, а не на весь экран
+for_window [class="Nm-connection-editor"] floating enable, resize set 700 500, move position center
+for_window [class="Blueman-manager"] floating enable, resize set 700 500, move position center
 
 # Навигация по окнам (клавиатура)
 bindsym $mod+j focus left
@@ -217,7 +227,7 @@ bar {
     status_command i3status
     font pango:monospace 10
     height 22
-    tray_output none
+    tray_output primary
     
     colors {
         background #CC111216
