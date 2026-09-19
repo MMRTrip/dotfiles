@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Триггер для экрана 1366x768
-TRIGGER_Y=730
+TRIGGER_Y=740
 
 while true; do
     if pgrep -x "polybar" > /dev/null; then

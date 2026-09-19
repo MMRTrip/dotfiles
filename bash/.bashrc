@@ -53,3 +53,4 @@ alias lla='lsd -la'
 alias lt='lsd --tree'
 
 alias ch="~/check_phone.sh"
+. "$HOME/.cargo/env"
