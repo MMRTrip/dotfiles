@@ -54,3 +54,5 @@ alias lt='lsd --tree'
 
 alias ch="~/check_phone.sh"
 . "$HOME/.cargo/env"
+
+alias cargowin="cargo build --release --target x86_64-pc-windows-gnu"

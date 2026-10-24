@@ -145,6 +145,16 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+set $ws11 "11"
+set $ws12 "12"
+set $ws13 "13"
+set $ws14 "14"
+set $ws15 "15"
+set $ws16 "16"
+set $ws17 "17"
+set $ws18 "18"
+set $ws19 "19"
+set $ws20 "20"
 
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -156,6 +166,16 @@ bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
+bindcode $mod+87 workspace number $ws11
+bindcode $mod+88 workspace number $ws12
+bindcode $mod+89 workspace number $ws13
+bindcode $mod+83 workspace number $ws14
+bindcode $mod+84 workspace number $ws15
+bindcode $mod+85 workspace number $ws16
+bindcode $mod+79 workspace number $ws17
+bindcode $mod+80 workspace number $ws18
+bindcode $mod+81 workspace number $ws19
+bindcode $mod+90 workspace number $ws20
 
 # Перемещение окон между рабочими столами
 bindsym $mod+Shift+1 move container to workspace number $ws1
